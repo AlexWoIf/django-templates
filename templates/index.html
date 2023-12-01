@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}Sensive Blog - Home{% endblock %}
+{% load static %}
+  {% block title %}Sensive Blog - Home{% endblock %}
   {% block content %}
     <main class="site-main">
       <!--================Hero Banner start =================-->  
@@ -24,7 +25,11 @@
               <div class="flex-fill" style="margin-right: 30px;">
                 <div class="card blog__slide text-center">
                   <div class="blog__slide__img">
-                    <img class="card-img rounded-0" src="{{ post.image_url }}" alt="">
+                    {% if post.image_url %}
+                      <img class="card-img rounded-0" src="{{ post.image_url }}" alt="Blog post image">
+                    {% else %}
+                      <img class="card-img rounded-0" src="{% static "/img/banner/blog.png" %}" alt="Blog post default image">
+                    {% endif %}
                   </div>
                   <div class="blog__slide__content">
                     <h3><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h3>
@@ -47,7 +52,9 @@
                 <div class="single-recent-blog-post">
                   <div class="thumb">
                     {% if post.image_url %}
-                      <img class="img-fluid" src="{{ post.image_url }}" alt="">
+                      <img class="img-fluid" src="{{ post.image_url }}" alt="Blog post image">
+                    {% else %}
+                      <img class="img-fluid" src="{% static "/img/banner/blog.png" %}" alt="Blog post default image">
                     {% endif %}
                     <ul class="thumb-info" style="max-width: 550px;">
                       <li><a href="#"><i class="ti-user"></i>{{ post.author }}</a></li>
